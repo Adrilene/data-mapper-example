@@ -10,7 +10,7 @@ escolher-vilao --> pega lista vilões vivos -> aleatório
 '''
 
 class Vilao():
-    def __init__(self, nome, herois, vida, cidades):
+    def __init__(self, nome, vida):
         self.nome = nome
         self.vida = vida
 
@@ -21,5 +21,3 @@ class Vilao():
             faz um update no banco dessa cidade
         '''
         pass
-
-    

@@ -43,9 +43,22 @@ class VilaoMapper():
 
     def atualizar_vilao(self, nome, vida):
         cur = conn.cursor()
-        sql = f'update vilao set vida={vida} where nome="{nome}");'
+        sql = f'update vilao set vida={vida} where nome="{nome}";'
         cur.execute(sql)
         conn.commit()
+
+    def delete_vilao(self, nome):
+        cur = conn.cursor()
+        sql = f'delete from vilao where nome="{nome}";'
+        cur.execute(sql)
+        conn.commit()
+
+    def get_id(self, vilao):
+        cur = conn.cursor()
+        sql = f'select id from vilao where nome="{vilao.nome}";'
+        cur.execute(sql)
+        return cur.fetchone()[0]
+
 ''' 
 con = sqlite3.connect('base.db')
 

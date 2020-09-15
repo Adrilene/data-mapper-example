@@ -23,7 +23,7 @@ class HeroiMapper():
         cur.execute(sql)
         row = cur.fetchone()
         cidade = CidadeMapper().buscar_cidade_por_id(row[2])
-        heroi = Heroi(row[1], cidade.id, row[3], row[4])
+        heroi = Heroi(row[1], cidade.nome, row[3], row[4])
         cur.close()
         return heroi
 

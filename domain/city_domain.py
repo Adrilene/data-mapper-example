@@ -4,9 +4,8 @@ class Cidade:
         self.ataque = ataque
         self.vilao = vilao
 
-    def sob_ataque(self, vilao):
+    def sob_ataque(self, vilao_id):
         from data_access import city_mapper
         self.ataque = True
-        self.vilao = vilao.id
         cidade = city_mapper.CidadeMapper()
-        cidade.atualizar_cidade(self)
+        cidade.atualizar_cidade(self, vilao_id)

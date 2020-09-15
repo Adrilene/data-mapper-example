@@ -17,4 +17,4 @@ flash = Heroi(nome='flash',
                 forca=80)
 
 coringa = Vilao(nome='coringa',
-                vida=500)
+                vida=200)

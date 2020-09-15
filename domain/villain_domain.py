@@ -15,4 +15,7 @@ class Vilao():
         self.vida = vida
 
     def atacar_cidade(self, cidade):
-        cidade.sob_ataque(self)
+        from data_access.villain_mapper import VilaoMapper
+        vilao_map = VilaoMapper()
+        id = vilao_map.get_id(self)
+        cidade.sob_ataque(id)

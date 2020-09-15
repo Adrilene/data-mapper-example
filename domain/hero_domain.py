@@ -12,12 +12,19 @@ class Heroi():
     def salvar_cidade(self):
         cidade_map = city_mapper.CidadeMapper()
         vilao_map = villain_mapper.VilaoMapper()
-        cidade = cidade_map.buscar_cidade_por_id(self.cidade)
+        cidade = cidade_map.buscar_cidade(self.cidade)
         if cidade.ataque:
             vilao = vilao_map.buscar_vilao(cidade.vilao)
             return vilao
 
     def atacar_vilao(self, vilao):
-        vilao = vilao_map.buscar_vilao(vilao.nome)
-        nova_vida = vilao.vida - self.forca
-        vilao_map.atualizar_vilao(vilao.nome, nova_vida)
+        vilao_map = villain_mapper.VilaoMapper()
+        vilao.vida -= self.forca
+        vilao_map.atualizar_vilao(vilao.nome, vilao.vida)
+        return vilao
+
+
+'''
+objeto salva o nome
+banco salva o id
+'''

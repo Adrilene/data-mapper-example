@@ -15,9 +15,11 @@ def vilao_menu():
     print(f'Cidades: {nomes_cidades}')
     cidade_atacada = input()
     cidade_atacada = [cidade for cidade in cidades if cidade_atacada == cidade.nome][0]
+
     vilao.atacar_cidade(cidade_atacada)
     cidade = cidade_map.buscar_cidade(cidade_atacada.nome)
     vilao = vilao_map.buscar_vilao_por_id(vilao.id)
+    
     print('Status da cidade:')
     print(f'Nome:{cidade.nome}, Sob_ataque:{cidade.ataque}, Id_Vilão:{cidade.vilao}, Vilão:{vilao.nome}')
     print('FIM')

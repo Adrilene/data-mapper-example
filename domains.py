@@ -13,7 +13,7 @@ batman = Heroi(nome='batman',
 
 flash = Heroi(nome='flash',
                 cidade='central_city',
-                poder='rápido',
+                poder='rapido',
                 forca=80)
 
 coringa = Vilao(nome='coringa',

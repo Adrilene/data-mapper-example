@@ -8,30 +8,38 @@ class VilaoMapper():
         cur.execute(sql)
         rows = cur.fetchall()
         viloes = []
-        for i in range(len(rows)):
-            vilao = Vilao(*rows[i])
+        for row in rows:
+            vilao = Vilao(*row[1:])
             viloes.append(vilao)
+        cur.close()
         return viloes
 
     def buscar_vilao(self, nome):
         cur = conn.cursor()
         sql = f'SELECT * FROM vilao WHERE nome="{nome}"'
         cur.execute(sql)
-        rows = cur.fetchall()
-        return Vilao(*rows[0])
-    
+        row = cur.fetchone()
+        vilao = Vilao(*row[1:])
+        vilao.id = row[0]
+        return vilao
+
     def buscar_vilao_por_id(self, vilao_id):
         cur = conn.cursor()
         sql = f'SELECT * FROM vilao WHERE id={vilao_id}'
         cur.execute(sql)
-        rows = cur.fetchall()
-        return Vilao(*rows[0])
+        row = cur.fetchone()
+        vilao = Vilao(row[1], row[2])
+        vilao.id = row[0]
+        return vilao
     
     def inserir_vilao(self, vilao):
-        cur = conn.cursor()
-        sql = f'insert into vilao (nome, vida) values ("{vilao.nome}", {vilao.vida});'
-        cur.execute(sql)
-        conn.commit()
+        try:
+            cur = conn.cursor()
+            sql = f'insert into vilao (nome, vida) values ("{vilao.nome}", {vilao.vida});'
+            cur.execute(sql)
+            conn.commit()
+        except:
+            pass
 
     def atualizar_vilao(self, nome, vida):
         cur = conn.cursor()

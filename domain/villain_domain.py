@@ -14,10 +14,5 @@ class Vilao():
         self.nome = nome
         self.vida = vida
 
-    def atacar_cidade(self):
-        '''
-            pega cidade aleatória do banco 
-            recebe o objeto cidade
-            faz um update no banco dessa cidade
-        '''
-        pass
+    def atacar_cidade(self, cidade):
+        cidade.sob_ataque(self)

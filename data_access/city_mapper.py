@@ -6,59 +6,60 @@ from .villain_mapper import VilaoMapper
 class CidadeMapper():
     def listar_cidades(self):
         cur = conn.cursor()
-        sql = f'SELECT * FROM cidade'
+        sql = f'SELECT * FROM cidade;'
         cur.execute(sql)
         rows = cur.fetchall()
-        cur.close()
         cidades = []
-        for i in range(len(rows)):
-            vilao = VilaoMapper().buscar_vilao_por_id(rows[0][3])
-            cidade = Cidade(rows[0][1], rows[0][2], vilao.nome)
+        for row in rows:
+            cidade = Cidade(*row[1:])
+            cidade.id = row[0]
             cidades.append(cidade)
-        
+        cur.close()
         return cidades
 
     def buscar_cidade(self, nome):
         cur = conn.cursor()
         sql = f'SELECT * FROM cidade WHERE nome="{nome}"'
         cur.execute(sql)
-        rows = cur.fetchall()
-        vilao = VilaoMapper().buscar_vilao_por_id(rows[0][3])
+        row = cur.fetchone()
+        if row[3]:
+            vilao = VilaoMapper().buscar_vilao_por_id(row[2])
+            cidade = Cidade(row[1], row[2], vilao.id)
+        else:
+            cidade = Cidade(row[1], row[2], None)
+        cidade.id = row[0]
         cur.close()
-        cidade = Cidade(rows[0][1], rows[0][2], vilao.nome)
         return cidade
-    
+
     def buscar_cidade_por_id(self, cidade_id):
         cur = conn.cursor()
-        sql = f'SELECT * FROM cidade WHERE nome="{nome}"'
+        sql = f'SELECT * FROM cidade WHERE id="{cidade_id}"'
         cur.execute(sql)
-        rows = cur.fetchall()
+        row = cur.fetchone()
+        cidade = Cidade(*row[1:])
+        cidade.id = row[0]
         cur.close()
-        return Cidade(*rows)
+        return cidade
 
     def inserir_cidade(self, cidade):
+        try:
+            cur = conn.cursor()
+            sql = ''
+            if cidade.ataque:
+                vilao_id = VilaoMapper().buscar_vilao(cidade.vilao)
+                sql = f'insert into cidade (nome, ataque, vilao_id) values ("{cidade.nome}", {cidade.ataque}, {vilao_id});'
+            else:
+                sql = f'insert into cidade (nome, ataque) values ("{cidade.nome}", {cidade.ataque});'
+            cur.execute(sql)
+            conn.commit()
+            cur.close()
+        except:
+            pass
+
+
+    def atualizar_cidade(self, cidade):
         cur = conn.cursor()
-        sql = ''
-        if cidade.ataque:
-            vilao_id = VilaoMapper().buscar_vilao(cidade.vilao)
-            sql = f'insert into cidade (nome, ataque, vilao_id) values ("{cidade.nome}", {cidade.ataque}, {vilao_id});'
-        else:
-            sql = f'insert into cidade (nome, ataque) values ("{cidade.nome}", {cidade.ataque});'
+        sql = f'update cidade set ataque={cidade.ataque}, vilao_id={cidade.vilao} where nome="{cidade.nome}";'
         cur.execute(sql)
         conn.commit()
         cur.close()
-''' 
-con = sqlite3.connect('base.db')
-
-cur = con.cursor()
-
-sql = """
-CREATE TABLE carros (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    phone TEXT NOT NULL,
-                    email TEXT UNIQUE NOT NULL)"""
-
-cur.execute(sql)
-con.commit()
-con.close()
-'''

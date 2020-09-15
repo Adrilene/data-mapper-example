@@ -1,5 +1,4 @@
 from mapping import cidade_map, heroi_map, vilao_map
-from domain import hero_domain
 
 
 def heroi_menu():
@@ -28,7 +27,7 @@ def heroi_menu():
                 print('Sua cidade está segura, parabéns, você é um bom herói :)')
                 print('FIM')
         else: 
-            print('Não, sua cidade está segura, parabéns :)')
+            print('Sua cidade não está sendo atacada, parabéns :)')
             print('FIM')
     else: 
         print('Você é um mau herói >:(')

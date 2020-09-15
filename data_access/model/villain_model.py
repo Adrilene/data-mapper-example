@@ -11,6 +11,6 @@ from config import meta
 vilao = Table("vilao",
      meta,
      Column("id", Integer, primary_key=True, autoincrement=True, nullable=False),
-     Column("nome", String(50), nullable=False),
+     Column("nome", String(50), nullable=False, unique=True),
      Column("vida", Integer, nullable=False),
 )

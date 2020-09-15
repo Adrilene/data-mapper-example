@@ -9,29 +9,32 @@ class HeroiMapper():
         sql = f'SELECT * FROM heroi'
         cur.execute(sql)
         rows = cur.fetchall()
-        cur.close()
         herois = []
-        for i in range(len(rows)):
-            cidade = CidadeMapper().buscar_cidade_por_id(rows[0][3])
-            heroi = Heroi(rows[0][1], cidade.nome, rows[0][3], rows[0][4])
+        for row in rows:
+            cidade = CidadeMapper().buscar_cidade_por_id(row[2])
+            heroi = Heroi(row[1], cidade.nome, row[2], row[3])
             herois.append(heroi)
+        cur.close()
         return herois
 
     def buscar_heroi(self, nome):
         cur = conn.cursor()
         sql = f'SELECT * FROM heroi WHERE nome="{nome}"'
         cur.execute(sql)
-        rows = cur.fetchall()
+        row = cur.fetchone()
+        cidade = CidadeMapper().buscar_cidade_por_id(row[2])
+        heroi = Heroi(row[1], cidade.id, row[3], row[4])
         cur.close()
-        cidade = CidadeMapper().buscar_cidade_por_id(rows[0][3])
-        heroi = Heroi(rows[0][1], cidade.nome, rows[0][3], rows[0][4])
         return heroi
 
     def inserir_heroi(self, heroi):
-        import ipdb; ipdb.set_trace()
-        cidade = CidadeMapper().buscar_cidade(heroi.cidade)
-        cur = conn.cursor()
-        sql = f'insert into heroi (nome, forca, cidade_id) values ("{heroi.nome}", "{heroi.forca}", "{cidade_id}");'
-        cur.execute(sql)
-        conn.commit()
-        cur.close()
+        try:
+            cidade = CidadeMapper().buscar_cidade(heroi.cidade)
+            cur = conn.cursor()
+            sql = f'insert into heroi (nome, cidade_id, poder, forca) values ("{heroi.nome}", "{cidade.id}", "{heroi.poder}", "{heroi.forca}");'
+            cur.execute(sql)
+            conn.commit()
+            cur.close()
+        except:
+            pass
+

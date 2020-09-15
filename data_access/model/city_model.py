@@ -5,7 +5,7 @@ from config import meta
 city = Table("cidade",
      meta,
      Column("id", Integer, primary_key=True, nullable=False, autoincrement=True),
-     Column("nome", String(50), nullable=False),
+     Column("nome", String(50), nullable=False, unique=True),
      Column("ataque", Boolean),
      Column("vilao_id", Integer, ForeignKey("vilao.id")),
      sqlite_autoincrement=True

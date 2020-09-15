@@ -22,7 +22,7 @@ class CidadeMapper():
         sql = f'SELECT * FROM cidade WHERE nome="{nome}"'
         cur.execute(sql)
         row = cur.fetchone()
-        if row[3]:
+        if row[2]:
             vilao = VilaoMapper().buscar_vilao_por_id(row[2])
             cidade = Cidade(row[1], row[2], vilao.nome)
         else:
@@ -56,10 +56,12 @@ class CidadeMapper():
         except:
             pass
 
-
     def atualizar_cidade(self, cidade, vilao_id):
         cur = conn.cursor()
-        sql = f'update cidade set ataque={cidade.ataque}, vilao_id={vilao_id} where nome="{cidade.nome}";'
+        if not vilao_id:           
+            sql = f'update cidade set ataque={cidade.ataque}, vilao_id=NULL where nome="{cidade.nome}";'
+        else: 
+            sql = f'update cidade set ataque={cidade.ataque}, vilao_id={vilao_id} where nome="{cidade.nome}";'
         cur.execute(sql)
         conn.commit()
         cur.close()

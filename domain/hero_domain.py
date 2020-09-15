@@ -11,9 +11,9 @@ class Heroi():
 
     def salvar_cidade(self):
         cidade_map = city_mapper.CidadeMapper()
-        vilao_map = villain_mapper.VilaoMapper()
         cidade = cidade_map.buscar_cidade(self.cidade)
         if cidade.ataque:
+            vilao_map = villain_mapper.VilaoMapper()
             vilao = vilao_map.buscar_vilao(cidade.vilao)
             return vilao
 

@@ -1,7 +1,8 @@
-from mapping import cidade_map, heroi_map, vilao_map
+from config.mapping import mapping_init
 
 
 def vilao_menu():
+    cidade_map, heroi_map, vilao_map = mapping_init()
     print('=== DESTRUA A CIDADE ===')
     print('Escolha seu vilão')
     viloes = vilao_map.listar_viloes()

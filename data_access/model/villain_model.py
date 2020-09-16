@@ -1,12 +1,6 @@
 from sqlalchemy import Table, Column, Integer, String
-from config import meta
+from config.settings import meta
 
-'''class Vilao(engine.Model):
-    __tablename__ = "vilao"
-
-    id = engine.Column(engine.Integer, primary_key=True, autoincrement=True, nullable=False)
-    nome = engine.Column(engine.String(50), nullable=False)
-    vida = engine.Column(engine.Integer, nullable=False)'''
 
 vilao = Table("vilao",
      meta,
@@ -14,3 +8,11 @@ vilao = Table("vilao",
      Column("nome", String(50), nullable=False, unique=True),
      Column("vida", Integer, nullable=False),
 )
+
+'''CREATE TABLE vilao (
+	id INTEGER NOT NULL, 
+	nome VARCHAR(50) NOT NULL, 
+	vida INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome)
+)'''

@@ -1,4 +1,4 @@
-from config import conn
+from config.settings import conn
 from domain.city_domain import Cidade
 from .villain_mapper import VilaoMapper
 

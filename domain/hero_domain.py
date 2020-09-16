@@ -1,5 +1,5 @@
 import random
-from data_access import city_mapper, hero_mapper, villain_mapper
+from data_access.mapper import city_mapper, hero_mapper, villain_mapper
 
 
 class Heroi():
@@ -22,9 +22,3 @@ class Heroi():
         vilao.vida -= self.forca
         vilao_map.atualizar_vilao(vilao.nome, vilao.vida)
         return vilao
-
-
-'''
-objeto salva o nome
-banco salva o id
-'''

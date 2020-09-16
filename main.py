@@ -1,11 +1,8 @@
-import os
-#os.remove('app.db')
-from config import meta, engine
+from config.settings import meta, engine
 from data_access.model import city_model, hero_model, villain_model
-meta.create_all(engine)
-from menu_hero import heroi_menu
-from menu_villain import vilao_menu
-
+#from config import config, domains, mapping
+from interface.menu_hero import heroi_menu
+from interface.menu_villain import vilao_menu
 
 
 if __name__ == "__main__":

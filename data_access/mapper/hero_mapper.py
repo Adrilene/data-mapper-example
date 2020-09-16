@@ -1,4 +1,4 @@
-from config import conn
+from config.settings import conn
 from domain.hero_domain import Heroi
 from .city_mapper import CidadeMapper
 

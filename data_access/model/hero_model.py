@@ -1,13 +1,6 @@
 from sqlalchemy import Table, Column, Integer, String, ForeignKey
-from config import meta
+from config.settings import meta
 
-'''class Heroi(engine.Model):  
-    __tablename__ = "heroi"
-
-    id = engine.Column(engine.Integer, primary_key=True, autoincrement=True, nullable=False)
-    nome = engine.Column(engine.String(50), nullable=False)
-    cidade_id = engine.Column(engine.Integer, engine.ForeignKey("cidade.id"), nullable=False)
-    forca = engine.Column(engine.Integer, nullable=False)'''
 
 heroi = Table("heroi",
      meta,
@@ -17,3 +10,16 @@ heroi = Table("heroi",
      Column("poder", String(50), nullable=False),
      Column("forca", Integer, nullable=False),
 )
+
+'''
+CREATE TABLE heroi (
+	id INTEGER NOT NULL, 
+	nome VARCHAR(50) NOT NULL, 
+	cidade_id INTEGER, 
+	poder VARCHAR(50) NOT NULL, 
+	forca INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (nome), 
+	FOREIGN KEY(cidade_id) REFERENCES cidade (id)
+)
+'''

@@ -1,7 +1,8 @@
-from mapping import cidade_map, heroi_map, vilao_map
+from config.mapping import mapping_init
 
 
 def heroi_menu():
+    cidade_map, heroi_map, vilao_map = mapping_init()
     print('=== SALVE A CIDADE ===')
     print('Escolha seu herói')
     herois = heroi_map.listar_herois()

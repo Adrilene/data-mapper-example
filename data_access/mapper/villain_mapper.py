@@ -1,4 +1,4 @@
-from config import conn
+from config.settings import conn
 from domain.villain_domain import Vilao
 
 class VilaoMapper():
@@ -58,19 +58,3 @@ class VilaoMapper():
         sql = f'select id from vilao where nome="{vilao.nome}";'
         cur.execute(sql)
         return cur.fetchone()[0]
-
-''' 
-con = sqlite3.connect('base.db')
-
-cur = con.cursor()
-
-sql = """
-CREATE TABLE carros (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    phone TEXT NOT NULL,
-                    email TEXT UNIQUE NOT NULL)"""
-
-cur.execute(sql)
-con.commit()
-con.close()
-'''
